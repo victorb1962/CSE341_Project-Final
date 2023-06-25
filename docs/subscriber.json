@@ -1,0 +1,44 @@
+[
+	{
+		"lastName" : "Johnston",
+		"firstName" : "Julie",
+		"email" : "JJohnston@abcdef.com",
+		"username" : "jjohnston",
+		"password" : "password"
+	},
+	{
+		"lastName" : "Anderson",
+		"firstName" : "Albert",
+		"email" : "AAnderson@abcdef.com",
+		"username" : "aanderson",
+		"password" : "password"
+	},
+	{
+		"lastName" : "Sanders",
+		"firstName" : "Samantha",
+		"email" : "SSanders@abcdef.com",
+		"username" : "ssanders",
+		"password" : "password"
+	},
+	{
+		"lastName" : "Jimenez",
+		"firstName" : "Jose",
+		"email" : "JJimenez@abcdef.com",
+		"username" : "jjimenez",		
+		"password" : "password"
+	},
+	{
+		"lastName" : "Lamont",
+		"firstName" : "Lucy",
+		"email" : "LLamont@abcdef.com",
+		"username" : "llamont",		
+		"password" : "password"
+	},
+	{
+		"lastName" : "Wong",
+		"firstName" : "Walter",
+		"email" : "WWong@abcdef.com",
+		"username" : "wwong",		
+		"password" : "password"
+	}
+]
