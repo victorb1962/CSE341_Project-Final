@@ -11,8 +11,8 @@ const PORT = process.env.PORT || 3000;
 const app = express();
 
 // Swagger API requires
-const swaggerUI = require("swagger-ui-express");
-const swaggerJsdoc = require("swagger-jsdoc");
+const swaggerUI = require('swagger-ui-express');
+const swaggerJsdoc = require('swagger-jsdoc');
 // const swaggerDocument = require('./swagger.json');
 // const swaggerDocument = require('./swaggerDesign.json');
 
@@ -27,21 +27,23 @@ const MONGODB_URI = process.env.MONGODB_URI;
 const db = new MongoDB({
   uri: MONGODB_URI,
   magazine: [],
-  subscriber: []
+  subscriber: [],
 });
 
 //Swagger set up
 const options = {
   definition: {
-    openapi: "3.0.1",
+    openapi: '3.0.1',
     info: {
-      title: "Magazine Subscription API",
-      version: "1.0.0",
-      description: "API for a Magazine Subscription App"
+      title: 'Magazine Subscription API',
+      version: '1.0.0',
+      description: 'API for a Magazine Subscription App',
     },
-    servers: [{
-      url: process.env.HOST_URL
-    }],
+    servers: [
+      {
+        url: process.env.HOST_URL,
+      },
+    ],
     components: {
       securitySchemes: {
         bearerAuth: {
@@ -49,20 +51,22 @@ const options = {
           scheme: 'bearer',
           bearerFormat: 'JWT',
           name: 'Authorization',
-        }
-      }
+        },
+      },
     },
-    security: [{
-      bearerAuth: []
-    }],
+    security: [
+      {
+        bearerAuth: [],
+      },
+    ],
   },
-  apis: ["./swagger/*.js"]
-}
+  apis: ['./swagger/*.js'],
+};
 
 // Tell Swagger-jsdoc where/how to parse the comments
 const specs = swaggerJsdoc(options);
 // Aspecify specs to build UI & view api-docs
-app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs));
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(specs));
 
 // To make requests through api-docs
 app.use((req, res, next) => {
@@ -79,7 +83,7 @@ app.use((req, res, next) => {
 app.db = db;
 
 // Parse json body for the request
-app.use(express.json())
+app.use(express.json());
 app.use(bodyParser.json());
 
 // Routes
@@ -98,20 +102,16 @@ app.use((error, req, res, next) => {
 // CORS - connection
 const corsOptions = {
   origin: process.env.HOST_URL,
-  optionsSuccessStatus: 200
+  optionsSuccessStatus: 200,
 };
 app.use(cors(corsOptions));
 
 mongoose
   .connect(MONGODB_URI)
-  .then(result => {
+  .then((result) => {
     app.listen(PORT);
-    console.log("Connection successful");
+    console.log(`Connected to DB and listening on ${PORT}`);
   })
-  .catch(err => {
+  .catch((err) => {
     console.log(err);
   });
-
-app.listen(port, () => {
-  console.log(`Connected to DB and listening on port ${port}`);
-});
