@@ -30,6 +30,7 @@
  *              category: Automotive, Sports
  *              price: 15.45
  *              url: abc-subscription.media/carracingmadeeasy.com
+ *              author: Speedy McBurnout
  */
 
 //sets up header on Swagger UI

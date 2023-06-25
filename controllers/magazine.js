@@ -25,6 +25,7 @@ exports.postAddMagazine = (req, res, next) => {
   const category_list = req.body.category_list;
   const price = req.body.price;
   const url = req.body.url;
+  const author = req.subscriberId;
 
   let categoryObjArray = category_list.map(s => mongoose.Types.ObjectId(s));
 
@@ -32,7 +33,8 @@ exports.postAddMagazine = (req, res, next) => {
     title: title,
     category_list: categoryObjArray,
     price: price,
-    url: url
+    url: url,
+    author: author
   });
 
   magazine.save()
@@ -63,6 +65,7 @@ exports.putUpdateMagazine = (req, res, next) => {
   const category_list = req.body.category_list;
   const price = req.body.price;
   const url = req.body.url;
+  const author = req.subscriberId;
 
   let categoryObjArray = category_list.map(s => mongoose.Types.ObjectId(s));
 
@@ -74,7 +77,7 @@ exports.putUpdateMagazine = (req, res, next) => {
       throw error;
     }
 
-    if (magazine.creator.toString() !== creator) {
+    if (magazine.author.toString() !== author) {
       const error = new Error('Subscriber not authorized.');
       error.statusCode = 403;
       throw error;
@@ -99,7 +102,7 @@ exports.putUpdateMagazine = (req, res, next) => {
 
 //DELETE magazine by ID
 exports.deleteMagazine = (req, res, next) => {
-  const creator = req.userId;
+  const author = req.subscriberId;
 
   //get recipie id, delete magazine,
   Magazine.findById(req.params.magazineId)
@@ -110,7 +113,7 @@ exports.deleteMagazine = (req, res, next) => {
           throw error;
       }
       //Authorize user
-      if (magazine.creator.toString() !== creator) {
+      if (magazine.author.toString() !== author) {
         const error = new Error('Subscriber not authorized.');
         error.statusCode = 403;
         throw error;

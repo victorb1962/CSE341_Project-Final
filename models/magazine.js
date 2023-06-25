@@ -20,6 +20,11 @@ const magazineSchema = new Schema({
         type: String,
         required: true
     }
+    author: {
+        type: Schema.Types.ObjectId,
+        ref: 'Subscriber',
+        required: true
+    }
 });
 
 module.exports = mongoose.model('Magazine', magazineSchema);
