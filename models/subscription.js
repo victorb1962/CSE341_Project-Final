@@ -3,20 +3,12 @@ const Schema = mongoose.Schema;
 
 // Subscription Schema.
 const subscriptionSchema = new Schema({
-  qty: {
+  startDate: {
     type: Number,
     required: true,
   },
-  measurement: {
-    type: String,
-    required: true,
-  },
-  item: {
-    type: String,
-    required: true,
-  },
-  notes: {
-    type: String,
+  length: {
+    type: Number,
     required: true,
   },
 });

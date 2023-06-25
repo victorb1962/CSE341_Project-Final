@@ -1,16 +1,12 @@
-const express = require('express');
-
-const router = express.Router();
-const magazineController = require('../controllers/magazine');
-
-const { body } = require('express-validator');
-
-const isAuth = require('../middleware/is-auth');
+const express = require('express'); 
+const router = express.Router(); 
+const magazineController = require('../controllers/magazine'); 
+const { body } = require('express-validator'); 
+const isAuth = require('../middleware/is-auth'); 
 
 /*
- * Currently the POST route is working, and successfully adding magazines to the database. There is a sample magazine in mongoDB that can be used for testing.
- *
- * Uncomment your route when you have your controller working/during testing.
+ * Currently the POST route is working, and successfully adding magazines to the database. There is a sample magazine in mongoDB that can be used for testing. 
+ * Uncomment your route when you have your controller working/during testing. 
  */
 
 //GET all magazines

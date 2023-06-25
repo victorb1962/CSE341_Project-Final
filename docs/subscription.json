@@ -1,4 +1,4 @@
-subscriptionKey,magazineKey,subscriberKey,StartDate,Length
+subscriptionKey,magazineKey,subscriberKey,startDate,length
 1,1,1,2011-03-01,12
 2,2,2,2011-03-01,14
 3,6,3,2012-02-01,12

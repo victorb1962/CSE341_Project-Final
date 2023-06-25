@@ -1,0 +1,18 @@
+{
+    "subscriber": {
+        "lastName": "Banks",
+        "firstName": "Robyn",
+        "email": "robynbanks@wellsfargo.com",
+        "username": "rbanks",
+        "password": "password"
+    },
+    "magazine-list": {
+        "magazine1": {
+            "magazine-id": "001",
+            "title": "If Only I Could Sing",
+            "category": "Cultural, Entertainment",
+            "price": 12.45,
+            "url": "abc-subscription.media/ifonlyicouldsing.com"
+        }   
+    }
+}

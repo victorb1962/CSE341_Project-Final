@@ -1,13 +1,9 @@
 const express = require('express');
-const { body } = require('express-validator');
-
-const subscriberController = require('../controllers/subscriber');
-
-const router = express.Router();
-
-const isAuth = require('../middleware/is-auth');
-
-const Subscriber = require('../models/subscriber');
+const { body } = require('express-validator'); 
+const subscriberController = require('../controllers/subscriber'); 
+const router = express.Router(); 
+const isAuth = require('../middleware/is-auth'); 
+const Subscriber = require('../models/subscriber'); 
 
 // // PUT request to allow editing on a subscriber profile.
 // router.put(
@@ -15,9 +11,8 @@ const Subscriber = require('../models/subscriber');
 // );
 
 /**
- * There is a sample subscriber in mongoDB that can be used for testing.
- *
- * Only uncomment your route when you have your controller working/during testing.
+ * There is a sample subscriber in mongoDB that can be used for testing. 
+ * Only uncomment your route when you have your controller working/during testing. 
  */
 
 //POST to add subscriber
