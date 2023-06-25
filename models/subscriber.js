@@ -23,6 +23,12 @@ const subscriberSchema = new Schema({
         type: String,
         required: true
     }
+    // magazines: [
+    //     {
+    //         type: Schema.Types.ObjectId,
+    //         ref: 'magazine'
+    //     }
+    // ]
 });
 
 module.exports = mongoose.model('Subscriber', subscriberSchema);
