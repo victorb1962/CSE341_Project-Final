@@ -25,14 +25,16 @@ Run npm install and npm start from the backend folder in the terminal
 
 - Run the following in the terminal:
 - npm install
-- npm install mongodb mongoose dotenv cors csurf body-parser bcryptjs jsonwebtoken
+- npm install body-parser bcryptjs cors csurf dotenv jsonwebtoken 
+- npm install mongodb connect-mongodb-session mongoose  
 - npm install express express-session express-validator
 
 - npm install swagger-ui-express - See https://www.npmjs.com/package/swagger-ui-express
 - npm install swagger-jsdoc - See https://www.npmjs.com/package/swagger-jsdoc
 
-- npm install --dev swagger-autogen - See https://www.npmjs.com/package/swagger-autogen
-- npm run swagger - To recreate swagger.json
+- > > > npm install --dev swagger-autogen - See https://www.npmjs.com/package/swagger-autogen
+- > > > npm run swagger - To recreate swagger.json
+- > > > NOT USED for this project
 
 - > > > npm install lint eslint-config-prettier eslint-plugin-prettier prettier --dev
 - > > > NOT NECESSARY if extension already added to VS Code
