@@ -7,30 +7,42 @@
  *    Magazine:
  *      type: object
  *      required:
+ *          -magazineKey
  *          -title
  *          -category
  *          -price
+ *          -publisher
  *          -url
  *      properties:
+ *          magazineKey:
+ *              type: number
+ *              desc: Magazine alt key
  *          title:
  *              type: string
- *              desc: The Magazine Title
+ *              desc: Magazine title
  *          category_list:
  *              type: array
- *              desc: The magazine categories
+ *              desc: Magazine categories
  *              items:
  *                type: string
  *              individual_category:
  *                  category: category
+ *          price:
+ *              type: number
+ *              desc: Magazine price
+ *          publisher:
+ *              type: string
+ *              desc: Magazine publisher
  *          url:
  *              type: string
- *              desc: The magazine URL
+ *              desc: Magazine URL
  *          example:
- *              title: Car Racing Made Easy
- *              category: Automotive, Sports
- *              price: 15.45
- *              url: abc-subscription.media/carracingmadeeasy.com
- *              author: Speedy McBurnout
+ *              magazineKey: 1
+ *              title: Fishing in the Mojave
+ *              category: Sports, Travel
+ *              price: 13.95
+ *              publisher: abc-subscription.media
+ *              url: abc-subscription.media/fishinginthemojave.com
  */
 
 //sets up header on Swagger UI
@@ -79,7 +91,7 @@
  *              schema:
  *                $ref: '#/components/schemas/Magazine'
  *                properties:
- *                      callbackUrl: https://localhost:3000/
+ *                      callbackUrl: https://cse341-final-in8m.onrender.com/callback/
  *                      type: string
  *                      format: uri
  *                      example: https://myserver.com/send/callback/here
@@ -110,7 +122,7 @@
  *          type: string
  *        required: true
  *        description: Numeric ID of the magazine to get
- *        example: 64977423b8af319c323aef7e (Car Racing Made Easy)
+ *        example: 64a05c66115b238db392355e (Fishing in the Mojave)
  *     responses:
  *       200:
  *          description: Success message
@@ -136,7 +148,7 @@
  *          type: string
  *        required: true
  *        description: Numeric ID of the magazine to update
- *        example: 64977423b8af319c323aef7e (Car Racing Made Easy)
+ *        example: 64a05c66115b238db392355e (Fishing in the Mojave)
  *      - in: header
  *        name: auth
  *        description: a JWT token header "Bearer -token-"
@@ -149,7 +161,7 @@
  *              schema:
  *                $ref: '#/components/schemas/Magazine'
  *                properties:
- *                      callbackUrl: https://localhost:3000/
+ *                      callbackUrl: https://cse341-final-in8m.onrender.com/callback/
  *                      type: string
  *                      format: uri
  *                      example: https://myserver.com/send/callback/here
@@ -180,7 +192,7 @@
  *          type: string
  *        required: true
  *        description: Numeric ID of the magazine to delete
- *        example: 64977423b8af319c323aef7e (Car Racing Made Easy)
+ *        example: 64a05c66115b238db392355e (Fishing in the Mojave)
  *      - in: header
  *        name: auth
  *        description: a JWT token header "Bearer -token-"

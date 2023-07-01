@@ -28,6 +28,7 @@ const db = new MongoDB({
   uri: MONGODB_URI,
   magazine: [],
   subscriber: [],
+  subscription: [],
 });
 
 //Swagger set up

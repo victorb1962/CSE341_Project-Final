@@ -7,32 +7,37 @@
  *    Subscriber:
  *      type: object
  *      required:
+ *        - subscriberKey
  *        -lastName
  *        -firstName
  *        -email
  *        -username
  *        -password
  *      properties:
+ *          subscriberKey:
+ *              type: number
+ *              desc: Subscriber alt key
  *          lastName:
  *              type: string
- *              desc: Subscriber's Last Name
+ *              desc: Subscriber last name
  *          firstName:
  *              type: string
- *              desc: Subscriber's First Name
+ *              desc: Subscriber first name
  *          email:
  *              type: string
- *              desc: Subscriber's email address
+ *              desc: Subscriber email address
  *          username:
  *              type: string
- *              desc: Subscriber's username to login
+ *              desc: Subscriber username for login
  *          password:
  *              type: string
- *              desc: Subscriber's password
+ *              desc: Subscriber password
  *          example:
- *              lastName: Peace
- *              firstName: Warren
- *              email: wpeace@tolstoy.com
- *              username: warrenpeace
+ *              subscriberKey: 1
+ *              lastName: Johnston
+ *              firstName: Julie
+ *              email: JJohnston@abcdef.com
+ *              username: jjohnston
  *              password: password
  */
 
@@ -43,17 +48,17 @@
  *    Login-Subscriber:
  *      type: object
  *      required:
- *        -email
+ *        -username
  *        -password
  *      properties:
- *          email:
+ *          username:
  *              type: string
- *              desc: Subscriber's email address
+ *              desc: Subscriber username for login
  *          password:
  *              type: string
- *              desc: Subscriber's password
+ *              desc: Subscriber password
  *          example:
- *              email: myname@abcdef.com
+ *              username: jjohnston
  *              password: password
  *
  */
@@ -79,7 +84,7 @@
  *              schema:
  *                $ref: '#/components/schemas/Subscriber'
  *                properties:
- *                      callbackUrl: https://localhost:3000/
+ *                      callbackUrl: https://cse341-final-in8m.onrender.com/callback/
  *                      type: string
  *                      format: uri
  *                      example: https://myserver.com/send/callback/here
@@ -110,7 +115,7 @@
  *          type: string
  *        required: true
  *        description: ID of the subscriber to get
- *        example: 649773e6b8af319c323aef77 (Albert Anderson)
+ *        example: 64a05d20115b238db3923569 (Julie Johnston)
  *     responses:
  *       200:
  *          description: Success message
@@ -138,7 +143,7 @@
  *          type: string
  *        required: true
  *        description: Numeric ID of the subscriber to update
- *        example: 649773e6b8af319c323aef77 (Albert Anderson)
+ *        example: 64a05d20115b238db3923569 (Julie Johnston)
  *      - in: header
  *        name: auth
  *        description: a JWT token header "Bearer -token-"
@@ -151,7 +156,7 @@
  *              schema:
  *                $ref: '#/components/schemas/Subscriber'
  *                properties:
- *                      callbackUrl: https://localhost:3000/
+ *                      callbackUrl: https://cse341-final-in8m.onrender.com/callback/
  *                      type: string
  *                      format: uri
  *                      example: https://myserver.com/send/callback/here
@@ -182,7 +187,7 @@
  *          type: string
  *        required: true
  *        description: ID of the subscriber to get
- *        example: 649773e6b8af319c323aef77 (Albert Anderson)
+ *        example: 64a05d20115b238db3923569 (Julie Johnston)
  *      - in: header
  *        name: auth
  *        description: a JWT token header "Bearer -token-"
@@ -213,7 +218,7 @@
  *              schema:
  *                $ref: '#/components/schemas/Login-Subscriber'
  *                properties:
- *                      callbackUrl: https://localhost:3000/
+ *                      callbackUrl: https://cse341-final-in8m.onrender.com/callback/
  *                      type: string
  *                      format: uri
  *                required:
