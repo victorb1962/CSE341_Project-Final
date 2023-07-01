@@ -36,7 +36,7 @@ exports.postAddMagazine = (req, res, next) => {
     category_list: categoryObjArray,
     price: price,
     publisher: publisher,
-    url: url;
+    url: url
   });
 
   magazine.save()
