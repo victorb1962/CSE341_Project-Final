@@ -3,6 +3,10 @@ const Schema = mongoose.Schema;
 
 // Magazine Schema, references the category model.
 const magazineSchema = new Schema({
+  magazineKey: {
+    type: Number,
+    required: true,
+  },
   title: {
     type: String,
     required: true,
@@ -16,13 +20,13 @@ const magazineSchema = new Schema({
     type: Number,
     required: true,
   },
-  url: {
-    type: String,
-    required: true,
-  },
-  author: {
+  publisher: {
     type: Schema.Types.ObjectId,
     ref: 'Subscriber',
+    required: true,
+  },
+  url: {
+    type: String,
     required: true,
   },
 });

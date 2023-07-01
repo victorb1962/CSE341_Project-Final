@@ -21,20 +21,22 @@ exports.getMagazines = (req, res, next) => {
 
 //POST to add magazine
 exports.postAddMagazine = (req, res, next) => {
+  const magazineKey = req.body.magazineKey;
   const title = req.body.title;
   const category_list = req.body.category_list;
   const price = req.body.price;
+  const publisher = req.body.publisher;
   const url = req.body.url;
-  const author = req.subscriberId;
 
   let categoryObjArray = category_list.map(s => mongoose.Types.ObjectId(s));
 
   const magazine = new Magazine({
+    magazineKey: magazineKey,
     title: title,
     category_list: categoryObjArray,
     price: price,
-    url: url,
-    author: author
+    publisher: publisher,
+    url: url;
   });
 
   magazine.save()
@@ -61,11 +63,12 @@ exports.getMagazineById = (req, res, next) => {
 //PUT to update magazine by ID
 exports.putUpdateMagazine = (req, res, next) => {
   const magazineID = req.params.magazineId;
+  const magazineKey = req.body.magazineKey;
   const title = req.body.title;
   const category_list = req.body.category_list;
   const price = req.body.price;
+  const publisher = req.body.publisher;
   const url = req.body.url;
-  const author = req.subscriberId;
 
   let categoryObjArray = category_list.map(s => mongoose.Types.ObjectId(s));
 
@@ -77,14 +80,16 @@ exports.putUpdateMagazine = (req, res, next) => {
       throw error;
     }
 
-    if (magazine.author.toString() !== author) {
-      const error = new Error('Subscriber not authorized.');
+    if (magazine.publisher.toString() !== publisher) {
+      const error = new Error('Subscriber not authorized. Must be the Publisher.');
       error.statusCode = 403;
       throw error;
     }
+    magazine.magazineKey = magazineKey;
     magazine.title = title;
     magazine.category = category;
     magazine.price = price;
+    magazine.publisher = publisher;
     magazine.url = url;
 
     return magazine.save();
@@ -102,7 +107,7 @@ exports.putUpdateMagazine = (req, res, next) => {
 
 //DELETE magazine by ID
 exports.deleteMagazine = (req, res, next) => {
-  const author = req.subscriberId;
+  const publisher = req.subscriberId;
 
   //get recipie id, delete magazine,
   Magazine.findById(req.params.magazineId)
@@ -113,8 +118,8 @@ exports.deleteMagazine = (req, res, next) => {
           throw error;
       }
       //Authorize user
-      if (magazine.author.toString() !== author) {
-        const error = new Error('Subscriber not authorized.');
+      if (magazine.publisher.toString() !== publisher) {
+        const error = new Error('Subscriber not authorized. Must be the Publisher.');
         error.statusCode = 403;
         throw error;
       }

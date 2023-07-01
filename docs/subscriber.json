@@ -1,5 +1,6 @@
 [
 	{
+		"subscriberKey" : 1,
 		"lastName" : "Johnston",
 		"firstName" : "Julie",
 		"email" : "JJohnston@abcdef.com",
@@ -7,6 +8,7 @@
 		"password" : "password"
 	},
 	{
+		"subscriberKey" : 2,
 		"lastName" : "Anderson",
 		"firstName" : "Albert",
 		"email" : "AAnderson@abcdef.com",
@@ -14,6 +16,7 @@
 		"password" : "password"
 	},
 	{
+		"subscriberKey" : 3,
 		"lastName" : "Sanders",
 		"firstName" : "Samantha",
 		"email" : "SSanders@abcdef.com",
@@ -21,6 +24,7 @@
 		"password" : "password"
 	},
 	{
+		"subscriberKey" : 4,
 		"lastName" : "Jimenez",
 		"firstName" : "Jose",
 		"email" : "JJimenez@abcdef.com",
@@ -28,6 +32,7 @@
 		"password" : "password"
 	},
 	{
+		"subscriberKey" : 5,
 		"lastName" : "Lamont",
 		"firstName" : "Lucy",
 		"email" : "LLamont@abcdef.com",
@@ -35,10 +40,19 @@
 		"password" : "password"
 	},
 	{
+		"subscriberKey" : 6,
 		"lastName" : "Wong",
 		"firstName" : "Walter",
 		"email" : "WWong@abcdef.com",
 		"username" : "wwong",		
+		"password" : "password"
+	},
+	{
+		"subscriberKey" : 7,
+		"lastName" : "Publishing",
+		"firstName" : "ABC Subscription",
+		"email" : "email@abc-subscription.media",
+		"username" : "abc-subscription.media",		
 		"password" : "password"
 	}
 ]
