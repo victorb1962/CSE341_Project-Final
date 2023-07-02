@@ -24,7 +24,7 @@ Swagger documentation is in /swagger directory:
  *          -publisher
  *          -url
  *      properties:
-  *          magazineKey:
+ *          magazineKey:
  *              type: number
  *              desc: Magazine alt key
  *          title:

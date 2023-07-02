@@ -84,7 +84,8 @@
  *              schema:
  *                $ref: '#/components/schemas/Subscriber'
  *                properties:
- *                      callbackUrl: https://cse341-final-in8m.onrender.com/
+ *                      callbackUrl: https://localhost:3000/
+ *                      // callbackUrl: https://cse341-final-in8m.onrender.com/
  *                      type: string
  *                      format: uri
  *                      example: https://myserver.com/send/callback/here
@@ -156,7 +157,8 @@
  *              schema:
  *                $ref: '#/components/schemas/Subscriber'
  *                properties:
- *                      callbackUrl: https://cse341-final-in8m.onrender.com/
+ *                      callbackUrl: https://localhost:3000/
+ *                      // callbackUrl: https://cse341-final-in8m.onrender.com/
  *                      type: string
  *                      format: uri
  *                      example: https://myserver.com/send/callback/here
@@ -218,7 +220,8 @@
  *              schema:
  *                $ref: '#/components/schemas/Login-Subscriber'
  *                properties:
- *                      callbackUrl: https://cse341-final-in8m.onrender.com/
+ *                      callbackUrl: https://localhost:3000/
+ *                      // callbackUrl: https://cse341-final-in8m.onrender.com/
  *                      type: string
  *                      format: uri
  *                required:
