@@ -9,7 +9,6 @@
  *      required:
  *          -magazineKey
  *          -title
- *          -category
  *          -price
  *          -publisher
  *          -url
@@ -23,10 +22,8 @@
  *          category_list:
  *              type: array
  *              desc: Magazine categories
- *              items:
- *                type: string
- *              individual_category:
- *                  category: category
+ *              individual_category
+ *                  category: string
  *          price:
  *              type: number
  *              desc: Magazine price
@@ -36,6 +33,9 @@
  *          url:
  *              type: string
  *              desc: Magazine URL
+ *          subscriberId:
+ *              type: Schema.Types.ObjectId
+ *              description: Magazine subscriber
  *          example:
  *              magazineKey: 1
  *              title: Fishing in the Mojave
@@ -43,6 +43,7 @@
  *              price: 13.95
  *              publisher: abc-subscription.media
  *              url: abc-subscription.media/fishinginthemojave.com
+ *              subscriberId: 64a05d20115b238db392356b
  */
 
 //sets up header on Swagger UI
@@ -91,7 +92,7 @@
  *              schema:
  *                $ref: '#/components/schemas/Magazine'
  *                properties:
- *                      callbackUrl: https://cse341-final-in8m.onrender.com/callback/
+ *                      callbackUrl: https://cse341-final-in8m.onrender.com/
  *                      type: string
  *                      format: uri
  *                      example: https://myserver.com/send/callback/here
@@ -161,7 +162,7 @@
  *              schema:
  *                $ref: '#/components/schemas/Magazine'
  *                properties:
- *                      callbackUrl: https://cse341-final-in8m.onrender.com/callback/
+ *                      callbackUrl: https://cse341-final-in8m.onrender.com/
  *                      type: string
  *                      format: uri
  *                      example: https://myserver.com/send/callback/here

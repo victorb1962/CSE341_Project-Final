@@ -30,6 +30,7 @@ router.post(
         });
       })
       .normalizeEmail(),
+    body('subscriberKey').trim().isInt(),
     body('lastName').trim().not().isEmpty(),
     body('firstName').trim().not().isEmpty(),
     body('username').trim().not().isEmpty(),
@@ -60,6 +61,7 @@ router.put(
         });
       })
       .normalizeEmail(),
+    body('subscriberKey').trim().isInt(),
     body('lastName').trim().not().isEmpty(),
     body('firstName').trim().not().isEmpty(),
     body('username').trim().not().isEmpty(),

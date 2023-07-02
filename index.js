@@ -13,8 +13,6 @@ const app = express();
 // Swagger API requires
 const swaggerUI = require('swagger-ui-express');
 const swaggerJsdoc = require('swagger-jsdoc');
-// const swaggerDocument = require('./swagger.json');
-// const swaggerDocument = require('./swaggerDesign.json');
 
 //routes
 const magazineRoutes = require('./routes/magazine');
@@ -26,9 +24,8 @@ const MONGODB_URI = process.env.MONGODB_URI;
 //updated from sessions to a list of magazines
 const db = new MongoDB({
   uri: MONGODB_URI,
-  magazine: [],
-  subscriber: [],
-  subscription: [],
+  magazines: [],
+  subscribers: []
 });
 
 //Swagger set up
@@ -61,12 +58,12 @@ const options = {
       },
     ],
   },
-  apis: ['./swagger/*.js'],
+  apis: ["./swagger/*.js"]
 };
 
 // Tell Swagger-jsdoc where/how to parse the comments
 const specs = swaggerJsdoc(options);
-// Aspecify specs to build UI & view api-docs
+// Specify the specs to build UI & view api-docs
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(specs));
 
 // To make requests through api-docs
@@ -88,9 +85,9 @@ app.use(express.json());
 app.use(bodyParser.json());
 
 // Routes
-app.use('/magazine', magazineRoutes);
+app.use('/magazines', magazineRoutes);
 app.use('/subscriber', subscriberRoutes);
-app.use('/subscription', subscriptionRoutes);
+app.use('/subscriptions', subscriptionRoutes);
 
 app.use((error, req, res, next) => {
   console.log(error);

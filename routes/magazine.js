@@ -19,7 +19,7 @@ router.post(
   [
     body('magazineKey').trim().isInt(),
     body('title').trim().isLength({ min: 5 }),
-    body('category').isArray(),
+    body('category_list').isArray(),
     body('price').trim().isInt(),
     body('publisher').trim().isLength({ min: 5 }),
     body('url').trim().isLength({ min: 5 }),
@@ -36,7 +36,7 @@ router.put(
   [
     body('magazineKey').trim().isInt(),
     body('title').trim().isLength({ min: 5 }),
-    body('category').isArray(),
+    body('category_list').isArray(),
     body('price').trim().isInt(),
     body('publisher').trim().isLength({ min: 5 }),
     body('url').trim().isLength({ min: 5 }),

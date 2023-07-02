@@ -17,7 +17,7 @@ https://TBA
 
 ## Project Plan
 
-https://github.com/ /CSE341-Final_project/blob/main/Project%20Plan.pdf
+https://github.com/ /CSE341-Final_project/docs/CSE341_Group 7_Final Team Project Proposal.pdf
 
 ## How to run it
 
@@ -45,13 +45,10 @@ Run npm install and npm start from the backend folder in the terminal
 
 Start MongoDB connection in VS Code
 
-- add MONGODB_URI to .env file.
-
 Environmental Variables to add to .env file:
-
-- MongoDB connection
-- Github authentication - if used
-- Auhto0 authentication - if used
+- MONGODB_URI=<MongoDB connection>
+- HOST_URL=https://cse341-final-in8m.onrender.com - used by Swagger & CORs connections
+- SECRET_STRING=<used by JWT>
 
 ## Testing
 

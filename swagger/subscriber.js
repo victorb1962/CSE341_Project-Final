@@ -7,7 +7,7 @@
  *    Subscriber:
  *      type: object
  *      required:
- *        - subscriberKey
+ *        -subscriberKey
  *        -lastName
  *        -firstName
  *        -email
@@ -48,19 +48,19 @@
  *    Login-Subscriber:
  *      type: object
  *      required:
- *        -username
+ *        -email
  *        -password
  *      properties:
- *          username:
+ *          email:
  *              type: string
- *              desc: Subscriber username for login
+ *              desc: Subscriber email address
  *          password:
  *              type: string
  *              desc: Subscriber password
  *          example:
- *              username: jjohnston
+ *              email: JJohnston@abcdef.com
  *              password: password
- *
+ * 
  */
 
 //sets up header on Swagger UI
@@ -84,7 +84,7 @@
  *              schema:
  *                $ref: '#/components/schemas/Subscriber'
  *                properties:
- *                      callbackUrl: https://cse341-final-in8m.onrender.com/callback/
+ *                      callbackUrl: https://cse341-final-in8m.onrender.com/
  *                      type: string
  *                      format: uri
  *                      example: https://myserver.com/send/callback/here
@@ -156,7 +156,7 @@
  *              schema:
  *                $ref: '#/components/schemas/Subscriber'
  *                properties:
- *                      callbackUrl: https://cse341-final-in8m.onrender.com/callback/
+ *                      callbackUrl: https://cse341-final-in8m.onrender.com/
  *                      type: string
  *                      format: uri
  *                      example: https://myserver.com/send/callback/here
@@ -210,7 +210,7 @@
  * @swagger
  * /subscriber/login:
  *    post:
- *     summary: Logs in existing subscriber
+ *     summary: Login existing subscriber
  *     tags: [Subscribers]
  *     requestBody:
  *          content:
@@ -218,7 +218,7 @@
  *              schema:
  *                $ref: '#/components/schemas/Login-Subscriber'
  *                properties:
- *                      callbackUrl: https://cse341-final-in8m.onrender.com/callback/
+ *                      callbackUrl: https://cse341-final-in8m.onrender.com/
  *                      type: string
  *                      format: uri
  *                required:

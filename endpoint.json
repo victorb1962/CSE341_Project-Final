@@ -9,10 +9,11 @@
     "magazine-list": {
         "magazine1": {
             "magazine-id": "001",
-            "title": "If Only I Could Sing",
-            "category": "Cultural, Entertainment",
-            "price": 12.45,
-            "url": "abc-subscription.media/ifonlyicouldsing.com"
+            "title": "Fishing in the Mojave",
+            "category": "Sports, Travel",
+            "price": 13.95,
+            "publisher": "abc-subscription.media",
+            "url": "abc-subscription.media/fishinginthemojave.com"
         }   
     }
 }

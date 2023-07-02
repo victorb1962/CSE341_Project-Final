@@ -3,6 +3,10 @@ const Schema = mongoose.Schema;
 
 // Handles the subscriber schema.
 const subscriberSchema = new Schema({
+    subscriberKey: {
+        type: Number,
+        required: true
+    },
     lastName: {
         type: String,
         required: true
@@ -26,7 +30,7 @@ const subscriberSchema = new Schema({
     // magazines: [
     //     {
     //         type: Schema.Types.ObjectId,
-    //         ref: 'magazine'
+    //         ref: 'Magazine'
     //     }
     // ]
 });

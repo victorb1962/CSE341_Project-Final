@@ -11,11 +11,15 @@ const magazineSchema = new Schema({
     type: String,
     required: true,
   },
-  category: {
+  // category: {
+  //   type: Schema.Types.ObjectId,
+  //   ref: 'Category',
+  //   required: false,
+  // },
+  category_list: [{ 
     type: Schema.Types.ObjectId,
-    ref: 'Category',
-    required: false,
-  },
+    ref: 'Category'
+}],
   price: {
     type: Number,
     required: true,
@@ -29,6 +33,11 @@ const magazineSchema = new Schema({
     type: String,
     required: true,
   },
+  subscriber: {
+    type: Schema.Types.ObjectId,
+    ref: 'Subscriber',
+    required: true
+}
 });
 
 module.exports = mongoose.model('Magazine', magazineSchema);

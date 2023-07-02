@@ -18,6 +18,7 @@ exports.postAddSubscriber = (req, res, next) => {
     throw error;
   }
 
+  const subscriberKey = req.body.subscriberKey;
   const lastName = req.body.lastName;
   const firstName = req.body.firstName;
   const email = req.body.email;
@@ -27,6 +28,7 @@ exports.postAddSubscriber = (req, res, next) => {
     .hash(password, 12)
     .then((hashedPw) => {
       const subscriber = new Subscriber({
+        subscriberKey: subscriberKey,
         lastName: lastName,
         firstName: firstName,
         email: email,
@@ -79,6 +81,8 @@ exports.putUpdateSubscriber = (req, res, next) => {
     error.data = errors.array();
     throw error;
   }
+  
+  const subscriberKey = req.body.subscriberKey;
   const lastName = req.body.lastName;
   const firstName = req.body.firstName;
   const email = req.body.email;
@@ -93,6 +97,7 @@ exports.putUpdateSubscriber = (req, res, next) => {
         throw error;
       }
       bcrypt.hash(password, 12).then((hashedPw) => {
+        subscriber.subscriberKey = subscriberKey;
         subscriber.lastName = lastName;
         subscriber.firstName = firstName;
         subscriber.email = email;
