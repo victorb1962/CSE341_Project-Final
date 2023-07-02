@@ -15,7 +15,7 @@
  *              desc: Start date of subscription
  *          length:
  *              type: string
- *              desc: Length (months) of current subscrition
+ *              desc: Length (months) of current subscription
  *          example:
  *              startDate: 2011-03-01T00:00:00.000+00:00
  *              length: 12

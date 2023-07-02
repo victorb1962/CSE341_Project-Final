@@ -19,11 +19,6 @@
  *          title:
  *              type: string
  *              desc: Magazine title
- *          category_list:
- *              type: array
- *              desc: Magazine categories
- *              individual_category
- *                  category: string
  *          price:
  *              type: number
  *              desc: Magazine price
