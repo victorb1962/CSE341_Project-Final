@@ -57,6 +57,6 @@ Swagger documentation is in /swagger directory:
  *              subscriberId: 64a05d20115b238db392356b
  */
 
- *          magazines:
+ *          magazine:
  *              type: Schema.Types.ObjectId
- *              desc: Magazines from this publisher/subscriber
+ *              desc: Magazine from this publisher/subscriber

@@ -8,11 +8,11 @@ const mongoose = require('mongoose');
  * Make sure to un-comment the route in /routes/magazine.js before testing.
  */
 
-//GET magazines
-exports.getMagazines = (req, res, next) => {
+//GET all magazine
+exports.getAllMagazine = (req, res, next) => {
   Magazine.find()
-    .then(magazines => {
-      res.send(magazines); 
+    .then(magazine => {
+      res.send(magazine); 
     })
     .catch(error => {
       return res.status(500).send(error);

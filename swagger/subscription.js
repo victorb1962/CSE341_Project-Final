@@ -25,17 +25,17 @@
 /**
  * @swagger
  * tags:
- *    name: Subscriptions
- *    description: Add subscriptions
+ *    name: Subscription
+ *    description: Add subscription
  */
 
-//GET all subscriptions
+//GET all subscription
 /**
  * @swagger
- * /subscriptions/subscription:
+ * /subscription/subscription:
  *   get:
- *     summary: Get all subscriptions
- *     tags: [Subscriptions]
+ *     summary: Get all subscription
+ *     tags: []
  *     responses:
  *        200:
  *            description: Success message
@@ -50,18 +50,18 @@
 //POST to create a new subscription
 /**
  * @swagger
- * /subscriptions/add-subscription:
+ * /subscription/add-subscription:
  *   post:
  *     summary: Create a new subscription
- *     tags: [Subscriptions]
+ *     tags: [Subscription]
  *     requestBody:
  *          content:
  *            application/json:
  *              schema:
  *                $ref: '#/components/schemas/Subscription'
  *                properties:
- *                      callbackUrl: https://localhost:3000/
- *                      // callbackUrl: https://cse341-final-in8m.onrender.com/
+ *                      // callbackUrl: https://localhost:3000/
+ *                      callbackUrl: https://cse341-final-in8m.onrender.com/
  *                      type: string
  *                      format: uri
  *                      example: https://myserver.com/send/callback/here
@@ -81,10 +81,10 @@
 //GET subscription by ID
 /**
  * @swagger
- * /subscriptions/subscription/{subscriptionId}:
+ * /subscription/subscription/{subscriptionId}:
  *   get:
  *     summary: Get a subscription by id
- *     tags: [Subscriptions]
+ *     tags: [Subscription]
  *     parameters:
  *      - in: path
  *        name: subscriptionId
@@ -107,10 +107,10 @@
 //PUT to update a subscription by id
 /**
  * @swagger
- * /subscriptions/edit-subscription/{subscriptionId}:
+ * /subscription/edit-subscription/{subscriptionId}:
  *    put:
  *     summary: Update a subscription by id
- *     tags: [Subscriptions]
+ *     tags: [Subscription]
  *     parameters:
  *      - in: path
  *        name: subscriptionId
@@ -125,8 +125,8 @@
  *              schema:
  *                $ref: '#/components/schemas/Subscription'
  *                properties:
- *                      callbackUrl: https://localhost:3000/
- *                      // callbackUrl: https://cse341-final-in8m.onrender.com/
+ *                      // callbackUrl: https://localhost:3000/
+ *                      callbackUrl: https://cse341-final-in8m.onrender.com/
  *                      type: string
  *                      format: uri
  *                      example: https://myserver.com/send/callback/here
@@ -146,10 +146,10 @@
 //DELETE subscription by id
 /**
  * @swagger
- * /subscriptions/delete-subscription/{subscriptionId}:
+ * /subscription/delete-subscription/{subscriptionId}:
  *   delete:
  *     summary: Delete a subscription by id
- *     tags: [Subscriptions]
+ *     tags: [Subscription]
  *     parameters:
  *      - in: path
  *        name: subscriptionId

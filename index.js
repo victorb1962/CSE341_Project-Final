@@ -21,11 +21,11 @@ const subscriptionRoutes = require('./routes/subscription');
 
 const MONGODB_URI = process.env.MONGODB_URI;
 
-//updated from sessions to a list of magazines
+//updated from sessions to a list of magazine
 const db = new MongoDB({
   uri: MONGODB_URI,
-  magazines: [],
-  subscribers: []
+  magazine: [],
+  subscriber: []
 });
 
 //Swagger set up
@@ -84,10 +84,10 @@ app.db = db;
 app.use(express.json());
 app.use(bodyParser.json());
 
-// Routes
-app.use('/magazines', magazineRoutes);
+// Using defined routes above
+app.use('/magazine', magazineRoutes);
 app.use('/subscriber', subscriberRoutes);
-app.use('/subscriptions', subscriptionRoutes);
+app.use('/subscription', subscriptionRoutes);
 
 app.use((error, req, res, next) => {
   console.log(error);

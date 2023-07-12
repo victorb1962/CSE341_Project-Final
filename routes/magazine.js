@@ -5,12 +5,12 @@ const { body } = require('express-validator');
 const isAuth = require('../middleware/is-auth');
 
 /*
- * Currently the POST route is working, and successfully adding magazines to the database. There is a sample magazine in mongoDB that can be used for testing.
+ * Currently the POST route is working, and successfully adding magazine to the database. There is a sample magazine in mongoDB that can be used for testing.
  * Uncomment your route when you have your controller working/during testing.
  */
 
-//GET all magazines
-router.get('/magazines', magazineController.getMagazines);
+//GET all magazine
+router.get('/magazine', magazineController.getAllMagazine);
 
 //POST to add magazine
 router.post(
@@ -27,7 +27,7 @@ router.post(
   magazineController.postAddMagazine
 );
 //GET magazine by ID
-router.get('/magazines/:magazineId', magazineController.getMagazineById);
+router.get('/magazine/:magazineId', magazineController.getMagazineById);
 
 //PUT to update magazine by ID
 router.put(

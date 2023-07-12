@@ -4,7 +4,7 @@ const isAuth = require('../middleware/is-auth');
 const subscriptionController = require('../controllers/subscription'); 
 const router = express.Router(); 
 
-//GET all subscriptions
+//GET all subscription
 router.get('/subscription', subscriptionController.getSubscription);
 
 //POST to add subscription

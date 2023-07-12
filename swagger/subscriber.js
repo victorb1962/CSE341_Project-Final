@@ -67,7 +67,7 @@
 /**
  * @swagger
  * tags:
- *   name: Subscribers
+ *   name: Subscriber
  *   description: Registered subscriber accounts
  */
 
@@ -77,15 +77,15 @@
  * /subscriber/add-subscriber:
  *   post:
  *     summary: Create a new subscriber account
- *     tags: [Subscribers]
+ *     tags: [Subscriber]
  *     requestBody:
  *          content:
  *            application/json:
  *              schema:
  *                $ref: '#/components/schemas/Subscriber'
  *                properties:
- *                      callbackUrl: https://localhost:3000/
- *                      // callbackUrl: https://cse341-final-in8m.onrender.com/
+ *                      // callbackUrl: https://localhost:3000/
+ *                      callbackUrl: https://cse341-final-in8m.onrender.com/
  *                      type: string
  *                      format: uri
  *                      example: https://myserver.com/send/callback/here
@@ -105,10 +105,10 @@
 //GET subscriber by ID
 /**
  * @swagger
- * /subscriber/subscribers/{id}:
+ * /subscriber/subscriber/{id}:
  *   get:
  *     summary: Get a subscriber by id
- *     tags: [Subscribers]
+ *     tags: [Subscriber]
  *     parameters:
  *      - in: path
  *        name: id
@@ -136,7 +136,7 @@
  *     security:
  *      - bearerAuth: []
  *     summary: Update a subscriber by id
- *     tags: [Subscribers]
+ *     tags: [Subscriber]
  *     parameters:
  *      - in: path
  *        name: subscriberId
@@ -157,8 +157,8 @@
  *              schema:
  *                $ref: '#/components/schemas/Subscriber'
  *                properties:
- *                      callbackUrl: https://localhost:3000/
- *                      // callbackUrl: https://cse341-final-in8m.onrender.com/
+ *                      // callbackUrl: https://localhost:3000/
+ *                      callbackUrl: https://cse341-final-in8m.onrender.com/
  *                      type: string
  *                      format: uri
  *                      example: https://myserver.com/send/callback/here
@@ -181,7 +181,7 @@
  * /subscriber/delete-subscriber/{subscriberId}:
  *    delete:
  *     summary: Delete subscriber by ID
- *     tags: [Subscribers]
+ *     tags: [Subscriber]
  *     parameters:
  *      - in: path
  *        name: subscriberId
@@ -213,15 +213,15 @@
  * /subscriber/login:
  *    post:
  *     summary: Login existing subscriber
- *     tags: [Subscribers]
+ *     tags: [Subscriber]
  *     requestBody:
  *          content:
  *            application/json:
  *              schema:
  *                $ref: '#/components/schemas/Login-Subscriber'
  *                properties:
- *                      callbackUrl: https://localhost:3000/
- *                      // callbackUrl: https://cse341-final-in8m.onrender.com/
+ *                      // callbackUrl: https://localhost:3000/
+ *                      callbackUrl: https://cse341-final-in8m.onrender.com/
  *                      type: string
  *                      format: uri
  *                required:

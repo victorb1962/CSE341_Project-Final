@@ -45,17 +45,17 @@
 /**
  * @swagger
  * tags:
- *   name: Magazines
+ *   name: Magazine
  *   description: Magazine Managing API
  */
 
-//GET all magazines
+//GET all magazine
 /**
  * @swagger
- * /magazines/magazines:
+ * /magazine/magazine:
  *   get:
- *     summary: Get all magazines
- *     tags: [Magazines]
+ *     summary: Get all magazine
+ *     tags: [Magazine]
  *     responses:
  *       200:
  *          description: Success message
@@ -70,10 +70,10 @@
 //POST to create a new magazine
 /**
  * @swagger
- * /magazines/add-magazine:
+ * /magazine/add-magazine:
  *   post:
  *     summary: Create a new magazine
- *     tags: [Magazines]
+ *     tags: [Magazine]
  *     parameters:
  *      - in: header
  *        name: auth
@@ -87,8 +87,8 @@
  *              schema:
  *                $ref: '#/components/schemas/Magazine'
  *                properties:
- *                      callbackUrl: https://localhost:3000/
- *                      // callbackUrl: https://cse341-final-in8m.onrender.com/
+ *                      // callbackUrl: https://localhost:3000/
+ *                      callbackUrl: https://cse341-final-in8m.onrender.com/
  *                      type: string
  *                      format: uri
  *                      example: https://myserver.com/send/callback/here
@@ -108,10 +108,10 @@
 //GET magazine by ID
 /**
  * @swagger
- * /magazines/magazines/{id}:
+ * /magazine/magazine/{id}:
  *   get:
  *     summary: Get a magazine by id
- *     tags: [Magazines]
+ *     tags: [Magazine]
  *     parameters:
  *      - in: path
  *        name: id
@@ -134,10 +134,10 @@
 //PUT magazine by id
 /**
  * @swagger
- * /magazines/edit-magazine/{id}:
+ * /magazine/edit-magazine/{id}:
  *    put:
  *     summary: Update a magazine by id
- *     tags: [Magazines]
+ *     tags: [Magazine]
  *     parameters:
  *      - in: path
  *        name: id
@@ -158,8 +158,8 @@
  *              schema:
  *                $ref: '#/components/schemas/Magazine'
  *                properties:
- *                      callbackUrl: https://localhost:3000/
- *                      // callbackUrl: https://cse341-final-in8m.onrender.com/
+ *                      // callbackUrl: https://localhost:3000/
+ *                      callbackUrl: https://cse341-final-in8m.onrender.com/
  *                      type: string
  *                      format: uri
  *                      example: https://myserver.com/send/callback/here
@@ -179,10 +179,10 @@
 //DELETE magazine by id
 /**
  * @swagger
- * /magazines/delete-magazine/{id}:
+ * /magazine/delete-magazine/{id}:
  *    delete:
  *     summary: Delete a magazine by id
- *     tags: [Magazines]
+ *     tags: [Magazine]
  *     parameters:
  *      - in: path
  *        name: id

@@ -9,8 +9,8 @@ const { validationResult } = require('express-validator');
 //GET subscription
 exports.getSubscription = (req, res, next) => {
   Subscription.find()
-    .then(subscriptions => {
-      res.send(subscriptions); 
+    .then(subscription => {
+      res.send(subscription); 
     })
     .catch(error => {
       return res.status(500).send(error);

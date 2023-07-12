@@ -41,7 +41,7 @@ router.post(
 
 //GET subscriber by ID
 router.get(
-  '/subscribers/:subscriberId',
+  '/subscriber/:subscriberId',
   subscriberController.getSubscriberById
 );
 

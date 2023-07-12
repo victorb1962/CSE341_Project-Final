@@ -27,7 +27,7 @@ const subscriberSchema = new Schema({
         type: String,
         required: true
     }
-    // magazines: [
+    // magazine: [
     //     {
     //         type: Schema.Types.ObjectId,
     //         ref: 'Magazine'
