@@ -1,31 +1,17 @@
-const express = require('express'); 
-const { body } = require('express-validator'); 
-const isAuth = require('../middleware/is-auth'); 
-const subscriptionController = require('../controllers/subscription'); 
-const router = express.Router(); 
+const express = require('express');
+const router = express.Router();
 
-//GET all subscription
-router.get('/subscription', subscriptionController.getSubscription);
+const subscriptionController = require('../controllers/subscription');
+// const validation = require('../middleware/validate');
 
-//POST to add subscription
-router.post('/add-subscription', subscriptionController.postAddSubscription);
+router.get('/', subscriptionController.getAllSubscription);
 
-//GET subscription by ID
-router.get(
-  '/subscription/:subscriptionId',
-  subscriptionController.getSubscriptionById
-);
+router.get('/:id', subscriptionController.getSubscription);
 
-//PUT to update subscription
-router.put(
-  '/edit-subscription/:subscriptionId',
-  subscriptionController.putSubscriptionById
-);
+router.post('/', subscriptionController.createSubscription);
 
-//DELETE subscription
-router.delete(
-  '/delete-subscription/:subscriptionId',
-  subscriptionController.deleteSubscriptionById
-);
+router.put('/:id', subscriptionController.updateSubscription);
+
+router.delete('/:id', subscriptionController.deleteSubscription);
 
 module.exports = router;

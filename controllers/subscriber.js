@@ -1,206 +1,138 @@
-const Subscriber = require('../models/subscriber');
-const { validationResult } = require('express-validator');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken'); 
+const mongodb = require('../db/connect');
+const ObjectId = require('mongodb').ObjectId;
+const passwordUtil = require('../config/passwordComplexityCheck');
 
-/**
- * Added comments for each controller export to be placed.
- * Make sure to un-comment the route in /routes/subscriber.js before testing.
- */
+const getAllSubscriber = (req, res) => {
+  mongodb
+    .getDb()
+    .db()
+    .collection('subscriber')
+    .find()
+    .toArray((err, lists) => {
+      if (err) {
+        res.status(400).json({ message: err });
+      }
+      res.setHeader('Content-Type', 'application/json');
+      res.status(200).json(lists);
+    });
+};
 
-//POST to add subscriber
-exports.postAddSubscriber = (req, res, next) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    const error = new Error('Validation failed.');
-    error.statusCode = 422;
-    error.data = errors.array();
-    throw error;
+const getSubscriber = (req, res) => {
+  if (!ObjectId.isValid(req.params.id)) {
+    res.status(400).json('Must use a valid subscriber id to find a subscriber.');
   }
+  const subscriberId = new ObjectId(req.params.id);
+  mongodb
+    .getDb()
+    .db()
+    .collection('subscriber')
+    .find({ _id: subscriberId })
+    .toArray((err, result) => {
+      if (err) {
+        res.status(400).json({ message: err });
+      }
+      res.setHeader('Content-Type', 'application/json');
+      res.status(200).json(result[0]);
+    });
+};
 
-  const subscriberKey = req.body.subscriberKey;
-  const lastName = req.body.lastName;
-  const firstName = req.body.firstName;
-  const email = req.body.email;
-  const username = req.body.username;
+const createSubscriber = async (req, res) => {
+  const subscriber = {
+    subscriberKey: req.body.subscriberKey,
+    lastName: req.body.lastName,
+    firstName: req.body.firstName,
+    email: req.body.email,
+    username: req.body.username,
+    password: req.body.password
+  };
+
+  if (!req.body.username || !req.body.password) {
+    res.status(400).send({ message: 'Username and Password can not be empty.' });
+    return;
+  }
   const password = req.body.password;
-  bcrypt
-    .hash(password, 12)
-    .then((hashedPw) => {
-      const subscriber = new Subscriber({
-        subscriberKey: subscriberKey,
-        lastName: lastName,
-        firstName: firstName,
-        email: email,
-        username: username,
-        password: hashedPw,
-      });
-      return subscriber.save();
-    })
-
-    .then((result) => {
-      res
-        .status(201)
-        .json({ message: 'Subscriber created.', subscriberId: result._id });
-    })
-    .catch((err) => {
-      if (!err.statusCode) {
-        err.statusCode = 500;
-      }
-      next(err);
-    });
-};
-
-//GET subscriber by ID
-exports.getSubscriberById = (req, res, next) => {
-  Subscriber.findById(req.params.subscriberId)
-    .then((subscriber) => {
-      res.send(subscriber);
-    })
-    .catch((error) => {
-      return res.status(500).send(error);
-    });
-};
-
-//PUT to update subscriber by ID
-exports.putUpdateSubscriber = (req, res, next) => {
-  const authSubscriberId = req.subscriberId;
-  const subscriberId = req.params.subscriberId;
-
-  //Authorize subscriber
-  if (subscriberId !== authSubscriberId) {
-    const error = new Error('Subscriber not authorized.');
-    error.statusCode = 403;
-    throw error;
+  const passwordCheck = passwordUtil.passwordPass(password);
+  if (passwordCheck.error) {
+    res.status(400).send({ message: passwordCheck.error });
+    return;
   }
 
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    const error = new Error('Validation failed.');
-    error.statusCode = 422;
-    error.data = errors.array();
-    throw error;
+  const response = await mongodb.getDb().db().collection('subscriber').insertOne(subscriber);
+  if (response.acknowledged) {
+    res.status(201).json(response);
+  } else {
+    res.status(500).json(response.error || 'Some error occurred while creating the subscriber.');
   }
-  
-  const subscriberKey = req.body.subscriberKey;
-  const lastName = req.body.lastName;
-  const firstName = req.body.firstName;
-  const email = req.body.email;
-  const username = req.body.username;
+};
+
+const updateSubscriber = async (req, res) => {
+  if (!ObjectId.isValid(req.params.id)) {
+    res.status(400).json('Must use a valid subscriber id to update a subscriber.');
+  }
+
+  if (!req.body.username || !req.body.password) {
+    res.status(400).send({ message: 'Username and Password can not be empty.' });
+    return;
+  }
   const password = req.body.password;
-
-  Subscriber.findById(subscriberId)
-    .then((subscriber) => {
-      if (!subscriber) {
-        const error = new Error('Could not find subscriber.');
-        error.statusCode = 404;
-        throw error;
-      }
-      bcrypt.hash(password, 12).then((hashedPw) => {
-        subscriber.subscriberKey = subscriberKey;
-        subscriber.lastName = lastName;
-        subscriber.firstName = firstName;
-        subscriber.email = email;
-        subscriber.username = username;
-        subscriber.password = hashedPw;
-        return subscriber.save();
-      });
-    })
-    .then((result) => {
-      res.status(200).send(result);
-    })
-    .catch((error) => {
-      if (!error.statusCode) {
-        error.statusCode = 500;
-      }
-      next(error);
-    });
-};
-
-//DELETE subscriber by ID
-exports.deleteSubscriber = (req, res, next) => {
-  const authSubscriberId = req.subscriberId;
-  const subscriberId = req.params.subscriberId;
-
-  //Authorize subscriber
-  if (subscriberId !== authSubscriberId) {
-    const error = new Error('Subscriber not authorized.');
-    error.statusCode = 403;
-    throw error;
+  const passwordCheck = passwordUtil.passwordPass(password);
+  if (passwordCheck.error) {
+    res.status(400).send({ message: passwordCheck.error });
+    return;
   }
 
-  Subscriber.findById(req.params.subscriberId)
-    .then((subscriber) => {
-      if (!subscriber) {
-        const error = new Error('Could not find Subscriber.');
-        console.log('No subscriber found.');
-        error.statusCode = 404;
-        throw error;
-      }
-
-      return Subscriber.findByIdAndRemove(req.params.subscriberId);
-    })
-    .then((result) => {
-      console.log(result);
-      res.status(200).json({
-        message: 'Subscriber deleted. ',
-      });
-    })
-    .catch((err) => {
-      if (!err.statusCode) {
-        err.statusCode = 500;
-      }
-      next(err);
-    });
+  const subscriberId = new ObjectId(req.params.id);
+  // be aware of updateOne if you only want to update specific fields
+  const subscriber = {
+    lastName: req.body.lastName,
+    firstName: req.body.firstName,
+    email: req.body.email,
+    username: req.body.username,
+    password: req.body.password
+  };
+  const response = await mongodb
+    .getDb()
+    .db()
+    .collection('subscriber')
+    .replaceOne({ _id: subscriberId }, subscriber);
+  console.log(response);
+  if (response.modifiedCount > 0) {
+    res.status(204).send();
+  } else {
+    res.status(500).json(response.error || 'Some error occurred while updating the subscriber.');
+  }
 };
 
-//POST to add login Subscriber
-exports.login = (req, res, next) => {
-  const email = req.body.email;
-  const password = req.body.password;
-  let loadedSubscriber;
+const deleteSubscriber = async (req, res) => {
+  if (!ObjectId.isValid(req.params.id)) {
+    res.status(400).json('Must use a valid subscriber id to delete a subscriber.');
+  }
+  const subscriberId = new ObjectId(req.params.id);
 
-  Subscriber.findOne({
-    email: email,
-  })
-    .then((subscriber) => {
-      if (!subscriber) {
-        const error = new Error(' Username or password were invalid');
-        error.statusCode = 401;
-        throw error;
-      }
-      loadedSubscriber = subscriber;
+  if (!subscriberId) {
+    res.status(400).send({ message: 'Invalid Id supplied.' });
+    return;
+  }
 
-      return bcrypt.compare(password, subscriber.password);
-    })
-    .then((isEqual) => {
-      if (!isEqual) {
-        const error = new Error('Wrong username or password');
-        error.statusCode = 401;
-        throw error;
-      }
-      const token = jwt.sign(
-        {
-          email: loadedSubscriber.email,
-          subscriberId: loadedSubscriber._id.toString(),
-        },
-        process.env.SECRET_STRING,
-        {
-          expiresIn: '1h',
-        }
-      );
+  const response = await mongodb
+    .getDb()
+    .db()
+    .collection('subscriber')
+    .remove({ _id: subscriberId }, true);
+  console.log(response);
+  if (response.deletedCount > 0) {
+    res.status(204).send();
+  } else {
+    res.status(500).json(response.error || 'Some error occurred while deleting the subscriber.');
+  }
+};
 
-      res.header('Authorization', 'Bearer ' + token);
-
-      res.status(200).json({
-        token: token,
-        subscriberId: loadedSubscriber._id.toString(),
-      });
-    })
-    .catch((err) => {
-      if (!err.statusCode) {
-        err.statusCode = 500;
-      }
-      next(err);
-    });
+module.exports = {
+  getAllSubscriber,
+  getSubscriber,
+  createSubscriber,
+  updateSubscriber,
+  deleteSubscriber,
+  // loginSubscriber,
+  // logoutSubscriber
 };

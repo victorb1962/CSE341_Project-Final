@@ -1,54 +1,17 @@
 const express = require('express');
 const router = express.Router();
+
 const magazineController = require('../controllers/magazine');
-const { body } = require('express-validator');
-const isAuth = require('../middleware/is-auth');
+const validation = require('../middleware/validate');
 
-/*
- * Currently the POST route is working, and successfully adding magazine to the database. There is a sample magazine in mongoDB that can be used for testing.
- * Uncomment your route when you have your controller working/during testing.
- */
+router.get('/', magazineController.getAllMagazine);
 
-//GET all magazine
-router.get('/magazine', magazineController.getAllMagazine);
+router.get('/:id', magazineController.getMagazine);
 
-//POST to add magazine
-router.post(
-  '/add-magazine',
-  isAuth,
-  [
-    body('magazineKey').trim().isInt(),
-    body('title').trim().isLength({ min: 5 }),
-    body('category_list').isArray(),
-    body('price').trim().isInt(),
-    body('publisher').trim().isLength({ min: 5 }),
-    body('url').trim().isLength({ min: 5 }),
-  ],
-  magazineController.postAddMagazine
-);
-//GET magazine by ID
-router.get('/magazine/:magazineId', magazineController.getMagazineById);
+router.post('/', validation.saveMagazine, magazineController.createMagazine);
 
-//PUT to update magazine by ID
-router.put(
-  '/edit-magazine/:magazineId',
-  isAuth,
-  [
-    body('magazineKey').trim().isInt(),
-    body('title').trim().isLength({ min: 5 }),
-    body('category_list').isArray(),
-    body('price').trim().isInt(),
-    body('publisher').trim().isLength({ min: 5 }),
-    body('url').trim().isLength({ min: 5 }),
-  ],
-  magazineController.putUpdateMagazine
-);
+router.put('/:id', magazineController.updateMagazine);
 
-//DELETE magazine
-router.delete(
-  '/delete-magazine/:magazineId',
-  isAuth,
-  magazineController.deleteMagazine
-);
+router.delete('/:id', magazineController.deleteMagazine);
 
 module.exports = router;

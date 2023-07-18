@@ -1,104 +1,101 @@
-const Subscription = require('../models/subscription'); 
-const { validationResult } = require('express-validator'); 
+const mongodb = require('../db/connect');
+const ObjectId = require('mongodb').ObjectId;
 
-/**
- * Added comments for each controller export to be placed. 
- * Make sure to un-comment the route in /routes/subscription.js before testing.
- */
-
-//GET subscription
-exports.getSubscription = (req, res, next) => {
-  Subscription.find()
-    .then(subscription => {
-      res.send(subscription); 
-    })
-    .catch(error => {
-      return res.status(500).send(error);
+const getAllSubscription = async (req, res) => {
+  try {
+    const result = await mongodb.getDb().db().collection('subscription').find();
+    result.toArray().then((lists) => {
+      res.setHeader('Content-Type', 'application/json');
+      res.status(200).json(lists);
     });
-}
-
-//POST to add subscription
-exports.postAddSubscription = (req, res, next) => {
-  const startDate = req.body.startDate;
-  const length = req.body.length;
-
-  const subscription = new Subscription({
-    startDate: startDate,
-    length: length
-  });
-
-  subscription.save()
-    .then(result => {
-      console.log('Subscription created.');
-      res.send(subscription);
-    })
-    .catch(error => {
-      return res.status(500).send(error);
-    })
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
 };
 
-//GET subscription by ID
-exports.getSubscriptionById = (req, res, next) => {
-  Subscription.findById(req.params.subscriptionId)
-    .then(subscription => {
-      res.send(subscription);
-    })
-    .catch(error => {
-      return res.status(500).send(error);
+const getSubscription = async (req, res) => {
+  try {
+    const subscriptionId = new ObjectId(req.params.id);
+    const result = await mongodb.getDb().db().collection('subscription').find({ _id: subscriptionId });
+    result.toArray().then((lists) => {
+      res.setHeader('Content-Type', 'application/json');
+      res.status(200).json(lists[0]);
     });
-}
-
-//PUT to update subscription by ID
-exports.putSubscriptionById = (req, res, next) => {
-  const startDate = req.body.startDate;
-  const length = req.body.length;
-  const subscriptionId = req.params.subscriptionId;
-
-  Subscription.findById(subscriptionId)
-  .then(subscription => {
-    if (!subscription) {
-      const error = new Error('Could not find subscription.');
-      error.statusCode = 404;
-      throw error;
-    }
-
-    subscription.startDate = startDate;
-    subscription.length = length;
-
-    return subscription.save();
-  })
-  .then(result => {
-    res.status(200).send(result);
-  })
-  .catch(error => {
-    if (!error.statusCode) {
-      error.statusCode = 500;
-    }
-    next(error);
-  })
+  } catch (err) {
+    res.status(500).json(err);
+  }
 };
 
-//DELETE subscription by ID
-exports.deleteSubscriptionById = (req, res, next) => {
-  Subscription.findById(req.params.subscriptionId)
-    .then(subscription => {
-      // res.send(subscription);
-      if (!subscription) {
-        const error = new Error ('Could not find subscription.');
-        console.log ("No subscription found.")
-        error.statusCode = 404;
-        throw error;
+const createSubscription = async (req, res) => {
+  try {
+    const subscription = {
+      subscriptionKey: req.body.subscriptionKey,
+      magazineKey: req.body.magazineKey,
+      subscriberKey: req.body.subscriberKey,
+      startDate: req.body.startDate,
+      length: req.body.length
+    };
+    const response = await mongodb.getDb().db().collection('subscription').insertOne(subscription);
+    if (response.acknowledged) {
+      res.status(201).json(response);
+    } else {
+      res.status(500).json(response.error || 'Some error occurred while creating the subscription.');
     }
-    return Subscription.findByIdAndRemove(req.params.subscriptionId);
-    })
-    .then(result => {
-      console.log(result);
-      res.status(200).json({message: 'Subscription deleted.'});
-    })
-    .catch(err => {
-      if (!err.statusCode) {
-          err.statusCode = 500;
-      }
-      next(err);
-  });
-}
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
+
+const updateSubscription = async (req, res) => {
+  try {
+    const subscriptionId = new ObjectId(req.params.id);
+    // be aware of updateOne if you only want to update specific fields
+    const subscription = {
+      subscriptionKey: req.body.subscriptionKey,
+      magazineKey: req.body.magazineKey,
+      subscriberKey: req.body.subscriberKey,
+      startDate: req.body.startDate,
+      length: req.body.length
+    };
+    const response = await mongodb
+      .getDb()
+      .db()
+      .collection('subscription')
+      .replaceOne({ _id: subscriptionId }, subscription);
+    console.log(response);
+    if (response.modifiedCount > 0) {
+      res.status(204).send();
+    } else {
+      res.status(500).json(response.error || 'Some error occurred while updating the subscription.');
+    }
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
+
+const deleteSubscription = async (req, res) => {
+  try {
+    const subscriptionId = new ObjectId(req.params.id);
+    const response = await mongodb
+      .getDb()
+      .db()
+      .collection('subscription')
+      .remove({ _id: subscriptionId }, true);
+    console.log(response);
+    if (response.deletedCount > 0) {
+      res.status(204).send();
+    } else {
+      res.status(500).json(response.error || 'Some error occurred while deleting the subscription.');
+    }
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
+
+module.exports = {
+  getAllSubscription,
+  getSubscription,
+  createSubscription,
+  updateSubscription,
+  deleteSubscription
+};
