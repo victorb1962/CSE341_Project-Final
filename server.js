@@ -20,8 +20,8 @@ const config = {
   authRequired: false,
   auth0Logout: true,
   baseURL: process.env.BASE_URL,
-  secret: process.env.AUTH0_SECRET,
   clientID: process.env.AUTH0_CLIENT_ID,
+  secret: process.env.AUTH0_CLIENT_SECRET,
   issuerBaseURL: process.env.AUTH0_ISSUER_BASE_URL
 };
 
