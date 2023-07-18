@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const Schema = mongoose.Schema; 
 
 // Magazine Schema, references the category model.
 const magazineSchema = new Schema({

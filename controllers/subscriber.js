@@ -1,7 +1,7 @@
 const Subscriber = require('../models/subscriber');
 const { validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken'); 
 
 /**
  * Added comments for each controller export to be placed.

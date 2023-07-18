@@ -1,7 +1,7 @@
 const Magazine = require('../models/magazine')
 //const isAuth = require('../middleware/is-auth')
 const { validationResult } = require('express-validator');
-const mongoose = require('mongoose');
+const mongoose = require('mongoose'); 
 
 /**
  * Added comments for each controller export to be placed. 

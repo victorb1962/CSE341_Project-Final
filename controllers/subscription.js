@@ -1,5 +1,5 @@
 const Subscription = require('../models/subscription'); 
-const { validationResult } = require('express-validator');
+const { validationResult } = require('express-validator'); 
 
 /**
  * Added comments for each controller export to be placed. 
