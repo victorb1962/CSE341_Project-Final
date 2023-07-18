@@ -6,9 +6,9 @@ const doc = {
     description: 'API for a Magazine Subscription App'
   }, 
 
-  host: 'localhost:3000', // enable for localhost with 'http'
-  // host: 'https://cse341-final-in8m.onrender.com', // enable for production with 'https'
-  schemes: ['http']
+  // host: 'localhost:3000', // enable for localhost with 'http'
+  host: 'https://cse341-final-in8m.onrender.com', // enable for production with 'https'
+  schemes: ['https']
 };
 
 const outputFile = './swagger.json';          // to generated json - npm run swagger
