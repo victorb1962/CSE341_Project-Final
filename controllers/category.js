@@ -24,7 +24,8 @@ const updateCategory = async (req, res) => {
       .getDb()
       .db()
       .collection('category')
-      .updateOne({ _id: categoryId }, {$push: {category: category}});
+      // The $push operator appends a new value to an array
+      .updateOne({ _id: categoryId }, {$push: {category}});
     console.log(response);
     if (response.modifiedCount > 0) {
       res.status(204).send();
