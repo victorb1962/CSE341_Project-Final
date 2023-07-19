@@ -13,24 +13,16 @@ const getAllCategory = async (req, res) => {
   }
 };
 
-const updateCategory = async (req, res) => {
+const createCategory = async (req, res) => {
   try {
-    const categoryId = new ObjectId(req.params.id);
-    // be aware of updateOne if you only want to update specific fields
     const category = {
-      category: req.body.category
+      category_item: req.body.category_item
     };
-    const response = await mongodb
-      .getDb()
-      .db()
-      .collection('category')
-      // The $push operator appends a new value to an array
-      .updateOne({ _id: categoryId }, {$push: {category}});
-    console.log(response);
-    if (response.modifiedCount > 0) {
-      res.status(204).send();
+    const response = await mongodb.getDb().db().collection('category').insertOne(category);
+    if (response.acknowledged) {
+      res.status(201).json(response);
     } else {
-      res.status(500).json(response.error || 'Some error occurred while updating the category.');
+      res.status(500).json(response.error || 'Some error occurred while creating the category.');
     }
   } catch (err) {
     res.status(500).json(err);
@@ -39,5 +31,5 @@ const updateCategory = async (req, res) => {
 
 module.exports = {
   getAllCategory,
-  updateCategory
+  createCategory
 };

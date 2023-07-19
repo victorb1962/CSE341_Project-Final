@@ -558,26 +558,18 @@
             "description": "Bad Request - for category"
           }
         }
-      }
-    },
-    "/category/{id}": {
-      "put": {
+      },
+      "post": {
         "tags": ["Category"],
         "description": "",
         "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
           {
             "name": "body",
             "in": "body",
             "schema": {
               "type": "object",
               "properties": {
-                "category": {
+                "category_item": {
                   "example": "any"
                 }
               }
@@ -588,11 +580,8 @@
           "201": {
             "description": "Created"
           },
-          "412": {
-            "description": "Precondition Failed"
-          },
           "500": {
-            "description": "Internal Server Error5"
+            "description": "Internal Server Error4"
           }
         }
       }

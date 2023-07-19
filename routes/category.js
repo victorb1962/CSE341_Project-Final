@@ -8,9 +8,9 @@ router.get('/', categoryController.getAllCategory);
 
 // router.get('/:id', categoryController.getCategory);
 
-// router.post('/', categoryController.createCategory);
+router.post('/', categoryController.createCategory);
 
-router.put('/:id', categoryController.updateCategory);
+// router.put('/:id', categoryController.updateCategory);
 
 // router.delete('/:id', categoryController.deleteCategory);
 
