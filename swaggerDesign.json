@@ -558,32 +558,6 @@
             "description": "Bad Request - for category"
           }
         }
-      },
-      "post": {
-        "tags": ["Category"],
-        "description": "",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "category": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "500": {
-            "description": "Internal Server Error4"
-          }
-        }
       }
     },
     "/category/{id}": {
