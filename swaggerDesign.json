@@ -23,13 +23,17 @@
       "description": "Requests related to subscription"
     },
     {
+      "name": "Category",
+      "description": "Requests related to category list"
+    },
+    {
       "name": "Miscellaneous",
       "description": "These are miscellaneous API endpoints completed or yet to be completed"
     }
   ],
   
   "schemes": [
-    "https"
+    "https" 
   ],
   
   "paths": {
@@ -75,7 +79,7 @@
             "description": "OK"
           },
           "400": {
-            "description": "Bad Request1"
+            "description": "Bad Request - for magazine"
           }
         }
       },
@@ -147,7 +151,7 @@
             "description": "OK"
           },
           "400": {
-            "description": "Bad Request2"
+            "description": "Bad Request - for magazineId"
           }
         }
       },
@@ -239,7 +243,7 @@
             "description": "OK"
           },
           "400": {
-            "description": "Bad Request3"
+            "description": "Bad Request - for subscriber"
           }
         }
       },
@@ -309,7 +313,7 @@
             "description": "OK"
           },
           "400": {
-            "description": "Bad Request4"
+            "description": "Bad Request - for subscriberId"
           }
         }
       },
@@ -401,7 +405,7 @@
             "description": "OK"
           },
           "400": {
-            "description": "Bad Request3"
+            "description": "Bad Request - for subscription"
           }
         }
       },
@@ -465,7 +469,7 @@
             "description": "OK"
           },
           "400": {
-            "description": "Bad Request4"
+            "description": "Bad Request - for subscriptionId"
           }
         }
       },
@@ -533,6 +537,88 @@
           },
           "500": {
             "description": "Internal Server Error6"
+          }
+        }
+      }
+    },
+
+    "/category/": {
+      "get": {
+        "tags": ["Category"],
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request - for category"
+          }
+        }
+      },
+      "post": {
+        "tags": ["Category"],
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "category": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "500": {
+            "description": "Internal Server Error4"
+          }
+        }
+      }
+    },
+    "/category/{id}": {
+      "put": {
+        "tags": ["Category"],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "category": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "412": {
+            "description": "Precondition Failed"
+          },
+          "500": {
+            "description": "Internal Server Error5"
           }
         }
       }
